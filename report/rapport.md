@@ -20,19 +20,31 @@ Non, notre environnement n'est pas scalable. Nous ne pouvons pas ajouter dynamiq
 
 > [M2] Describe what you need to do to add new `webapp` container to the infrastructure. Give the exact steps of what you have to do without modifiying the way the things are done. Hint: You probably have to modify some configuration and script files in a Docker image.
 
-Nous devons en premier lieu configurer HAProxy à l'aide de son fichier de configuration pour ajouter le nouveau noeud. En second lieu, on doit modifier le fichier `docker-compose.yml` pour builder une webapp supplémentaire et la lier au HAProxy. Finalement, 
+Nous devons en premier lieu configurer HAProxy à l'aide de son fichier de configuration pour ajouter le nouveau noeud. 
 
--> rebuild et relancer tous les containers avec un docker-compose build puis un docker-compose up -d (arrière plan) 
+En second lieu, on doit modifier le fichier `docker-compose.yml` pour builder une webapp supplémentaire et la lier au HAProxy. 
+
+Finalement, on doit rebuiler et relancer tous les conteneurs avec la commande:
+
+```sh
+docker-compose build
+```
+
+Puis la commande suivante pour exécuter les conteneurs en arrière-plan:
+
+```sh
+docker-compose up -d
+```
 
 > [M3] Based on your previous answers, you have detected some issues in the current solution. Now propose a better approach at a high level.
 
--> avoir une détection de la charge sur HAProxy qui lance une commande pour déployer des noeuds supplémentaires
+On pourrait premièrement proposer une détection de la charge sur HAProxy qui lancerait une commande pour déployer des noeuds supplémentaires. 
 
 -> avoir une commande pour avoir des noeuds supplémentaires, modifier la config HAProxy et relancer les noeuds supplémentaires
 
 > [M4] You probably noticed that the list of web application nodes is hardcoded in the load balancer configuration. How can we manage the web app nodes in a more dynamic fashion?
 
--> modifier la config de HAProxy pour qu'elle détecte automatiquement la présence de nouveau noeuds.
+On pourrait modifier la config de HAProcy afin qu'elle détecte automatiquement la présence de nouveaux noeuds.
 
 > [M5] Do you think our current solution is able to run additional management processes beside the main web server / load balancer process in a container? If no, what is missing / required to reach the goal? If yes, how to proceed to run for example a log forwarding process?
 
