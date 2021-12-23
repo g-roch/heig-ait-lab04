@@ -80,13 +80,21 @@ On pourrait modifier la config de HAProxy afin qu'elle détecte automatiquement 
 
 > Describe your difficulties for this task and your understanding of what is happening during this task. Explain in your own words why are we installing a process supervisor. Do not hesitate to do more research and to find more articles on that topic to illustrate the problem.
 
+Nous n'avons pas eu de difficultés particulières pour effectuer cette tâche; les consignes étaient claires et bien structurées. 
+
+Nous avons installé un process supervisor afin de répondre aux besoins de la question **[M5]**.
+
 ### Tâche 2
 
 > Provide the docker log output for each of the containers: `ha`, `s1` and `s2`. You need to create a folder `logs` in your repository to store the files separately from the lab report. For each lab task create a folder and name it using the task number. No need to create a folder when there are no logs.
 
 > Give the answer to the question about the existing problem with the current solution.
 
+As we can see in the log of task 2, we didn't face any problem with Serf. The main issue is that we currently have no script to handle new node joining the cluster.
+
 > Give an explanation on how `Serf` is working. Read the official website to get more details about the `GOSSIP` protocol used in `Serf`. Try to find other solutions that can be used to solve similar situations where we need some auto-discovery mechanism.
+
+todo
 
 ### Tâche 3
 
@@ -103,10 +111,16 @@ On pourrait modifier la config de HAProxy afin qu'elle détecte automatiquement 
 > Propose a different approach to architecture our images to be able to reuse as much as possible what we have done. Your proposition should also try to avoid as much as possible repetitions between your images.
 
 > Provide the `/tmp/haproxy.cfg` file generated in the `ha` container after each step.  Place the output into the `logs` folder like you already did for the Docker logs in the previous tasks. Three files are expected.
->
+
+ cf haproxy_ha.cfg haproxy_s1.cfg haproxy_s2.cfg
+
 > In addition, provide a log file containing the output of the `docker ps` console and another file (per container) with `docker inspect <container>`. Four files are expected.
 
+cf docker_ps, docker_inspect_ha, docker_inspect_s1, docker_inspect_s2
+
 > Based on the three output files you have collected, what can you say about the way we generate it? What is the problem if any?
+
+
 
 ### Tâche 5
 
@@ -116,13 +130,37 @@ On pourrait modifier la config de HAProxy afin qu'elle détecte automatiquement 
 
 > Provide the list of files from the `/nodes` folder inside the `ha` container. One file expected with the command output.
 
+après le démarrage des deux webapps, on voit les deux conteneurs. Expliquer que lorsq
+
+```sh
+➜  Labo_4 git:(master) ✗ docker-compose exec haproxy ls /nodes
+543a4bed586c  87f95e173cd0
+```
+
+lors de l'arret de s1:
+
+```sh
+➜  Labo_4 git:(master) ✗ docker stop s1
+s1
+➜  Labo_4 git:(master) ✗ docker-compose exec haproxy ls /nodes
+543a4bed586c
+
+```
+
 > Provide the configuration file after you stopped one container and the list of nodes present in the `/nodes` folder. One file expected with the command output. Two files are expected.
 >
->  In addition, provide a log file containing the output of the  `docker ps` console. One file expected.
+> In addition, provide a log file containing the output of the  `docker ps` console. One file expected.
 
 > (Optional:) Propose a different approach to manage the list of backend nodes. You do not need to implement it. You can also propose your own tools or the ones you discovered online. In that case, do not forget to cite your references.
 
 ### Tâche 6
+
+23.12.21, arrivés jusqu'ici, nous avons fait les task 2-5:
+
+- utilisation de Serf pour le gestion de membres
+- configuration de handlebars/nodejs
+- changement du haproxy de manière dynamique lorsqu'il y des changements de membres
+- 
 
 > Take a screenshots of the HAProxy stat page showing more than 2 web applications running. Additional screenshots are welcome to see a sequence of experimentations like shutting down a node and starting more nodes.
 >

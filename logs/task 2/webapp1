@@ -1,0 +1,50 @@
+Starting s1 ... done
+Attaching to s1
+s1         | [s6-init] making user provided files available at /var/run/s6/etc...exited 0.
+s1         | [s6-init] ensuring user provided files have correct perms...exited 0.
+s1         | [fix-attrs.d] applying ownership & permissions fixes...
+s1         | [fix-attrs.d] done.
+s1         | [cont-init.d] executing container initialization scripts...
+s1         | [cont-init.d] done.
+s1         | [services.d] starting services
+s1         | /opt/bin/serf agent --join ha --tag role=backend
+s1         | [services.d] done.
+s1         | ==> Starting Serf agent...
+s1         | ==> Starting Serf agent RPC...
+s1         | ==> Serf agent running!
+s1         |          Node name: 'e6dfcf76db12'
+s1         |          Bind addr: '0.0.0.0:7946'
+s1         |                        RPC addr: '127.0.0.1:7373'
+s1         |                       Encrypted: false
+s1         |                        Snapshot: false
+s1         |                         Profile: lan
+s1         |     Message Compression Enabled: true
+s1         | ==> Joining cluster...(replay: false)
+s1         |     Join completed. Synced with 1 initial agents
+s1         | 
+s1         | ==> Log data will now stream in as it occurs:
+s1         | 
+s1         |     2021/12/23 13:49:47 [INFO] agent: Serf agent starting
+s1         |     2021/12/23 13:49:47 [INFO] serf: EventMemberJoin: e6dfcf76db12 192.168.42.11
+s1         |     2021/12/23 13:49:47 [INFO] agent: joining: [ha] replay: false
+s1         |     2021/12/23 13:49:47 [INFO] serf: EventMemberJoin: c86469e8f31c 192.168.42.42
+s1         |     2021/12/23 13:49:47 [INFO] agent: joined: 1 nodes
+s1         | Application started
+s1         |     2021/12/23 13:49:48 [INFO] agent: Received event: member-join
+s1         | HEAD / 200 11.423 ms - 129
+s1         |     2021/12/23 13:49:50 [INFO] serf: EventMemberJoin: 38a91b0c5100 192.168.42.22
+s1         |     2021/12/23 13:49:51 [INFO] agent: Received event: member-join
+s1         | HEAD / 200 6.352 ms - 129
+s1         | HEAD / 200 1.566 ms - 129
+s1         | HEAD / 200 1.365 ms - 129
+s1         | HEAD / 200 1.703 ms - 129
+s1         | HEAD / 200 1.297 ms - 129
+s1         | HEAD / 200 1.214 ms - 129
+s1         | HEAD / 200 3.646 ms - 129
+s1         | HEAD / 200 2.864 ms - 129
+s1         | HEAD / 200 2.284 ms - 129
+s1         | HEAD / 200 2.656 ms - 129
+s1         | HEAD / 200 2.363 ms - 129
+s1         | HEAD / 200 1.523 ms - 129
+s1         | HEAD / 200 1.732 ms - 129
+s1         | HEAD / 200 1.105 ms - 129

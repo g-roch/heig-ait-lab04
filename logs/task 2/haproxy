@@ -1,0 +1,63 @@
+Starting ha ... done
+Attaching to ha
+ha         | [s6-init] making user provided files available at /var/run/s6/etc...exited 0.
+ha         | [s6-init] ensuring user provided files have correct perms...exited 0.
+ha         | [fix-attrs.d] applying ownership & permissions fixes...
+ha         | [fix-attrs.d] done.
+ha         | [cont-init.d] executing container initialization scripts...
+ha         | [cont-init.d] done.
+ha         | [services.d] starting services
+ha         | /opt/bin/serf agent --join ha --replay --event-handler member-join=/serf-handlers/member-join.sh --event-handler member-leave,member-failed=/serf-handlers/member-leave.sh --tag role=balancer
+ha         | [services.d] done.
+ha         | ==> Starting Serf agent...
+ha         | ==> Starting Serf agent RPC...
+ha         | ==> Serf agent running!
+ha         |          Node name: 'c86469e8f31c'
+ha         |          Bind addr: '0.0.0.0:7946'
+ha         |                        RPC addr: '127.0.0.1:7373'
+ha         |                       Encrypted: false
+ha         |                        Snapshot: false
+ha         |                         Profile: lan
+ha         |     Message Compression Enabled: true
+ha         | ==> Joining cluster...(replay: true)
+ha         |     Join completed. Synced with 1 initial agents
+ha         | 
+ha         | ==> Log data will now stream in as it occurs:
+ha         | 
+ha         |     2021/12/23 13:49:43 [INFO] agent: Serf agent starting
+ha         |     2021/12/23 13:49:43 [INFO] serf: EventMemberJoin: c86469e8f31c 192.168.42.42
+ha         |     2021/12/23 13:49:43 [INFO] agent: joining: [ha] replay: true
+ha         |     2021/12/23 13:49:43 [INFO] agent: joined: 1 nodes
+ha         |     2021/12/23 13:49:44 [INFO] agent: Received event: member-join
+ha         |     2021/12/23 13:49:44 [ERR] agent: Error invoking script '/serf-handlers/member-join.sh': exit status 127
+ha         | [WARNING] 356/134945 (213) : Server nodes/s1 is DOWN, reason: Layer4 timeout, check duration: 2000ms. 1 active and 0 backup servers left. 0 sessions active, 0 requeued, 0 remaining in queue.
+ha         | [WARNING] 356/134946 (213) : Server nodes/s2 is DOWN, reason: Layer4 timeout, check duration: 2000ms. 0 active and 0 backup servers left. 0 sessions active, 0 requeued, 0 remaining in queue.
+ha         | [NOTICE] 356/134946 (213) : haproxy version is 2.2.19-7ea3822
+ha         | [NOTICE] 356/134946 (213) : path to executable is /usr/local/sbin/haproxy
+ha         | [ALERT] 356/134946 (213) : backend 'nodes' has no server available!
+ha         |     2021/12/23 13:49:47 [INFO] serf: EventMemberJoin: e6dfcf76db12 192.168.42.11
+ha         |     2021/12/23 13:49:48 [INFO] agent: Received event: member-join
+ha         |     2021/12/23 13:49:48 [ERR] agent: Error invoking script '/serf-handlers/member-join.sh': exit status 127
+ha         |     2021/12/23 13:49:50 [INFO] serf: EventMemberJoin: 38a91b0c5100 192.168.42.22
+ha         |     2021/12/23 13:49:51 [INFO] agent: Received event: member-join
+ha         |     2021/12/23 13:49:51 [ERR] agent: Error invoking script '/serf-handlers/member-join.sh': exit status 127
+ha         | [WARNING] 356/134951 (213) : Server nodes/s1 is UP, reason: Layer7 check passed, code: 200, check duration: 10ms. 1 active and 0 backup servers online. 0 sessions requeued, 0 total in queue.
+ha         | [WARNING] 356/134954 (213) : Server nodes/s2 is UP, reason: Layer7 check passed, code: 200, check duration: 9ms. 2 active and 0 backup servers online. 0 sessions requeued, 0 total in queue.
+ha         |     2021/12/23 13:50:20 [INFO] memberlist: Suspect e6dfcf76db12 has failed, no acks received
+ha         |     2021/12/23 13:50:23 [INFO] memberlist: Suspect e6dfcf76db12 has failed, no acks received
+ha         |     2021/12/23 13:50:24 [INFO] memberlist: Marking e6dfcf76db12 as failed, suspect timeout reached (0 peer confirmations)
+ha         |     2021/12/23 13:50:24 [INFO] serf: EventMemberLeave: e6dfcf76db12 192.168.42.11
+ha         |     2021/12/23 13:50:25 [INFO] memberlist: Suspect e6dfcf76db12 has failed, no acks received
+ha         |     2021/12/23 13:50:25 [INFO] agent: Received event: member-leave
+ha         |     2021/12/23 13:50:25 [ERR] agent: Error invoking script '/serf-handlers/member-leave.sh': exit status 127
+ha         | [WARNING] 356/135026 (213) : Server nodes/s1 is DOWN, reason: Layer4 timeout, check duration: 2000ms. 1 active and 0 backup servers left. 0 sessions active, 0 requeued, 0 remaining in queue.
+ha         |     2021/12/23 13:50:45 [ERR] memberlist: Push/Pull with 38a91b0c5100 failed: dial tcp 192.168.42.22:7946: connect: connection refused
+ha         |     2021/12/23 13:50:46 [INFO] memberlist: Suspect 38a91b0c5100 has failed, no acks received
+ha         |     2021/12/23 13:50:48 [INFO] memberlist: Suspect 38a91b0c5100 has failed, no acks received
+ha         |     2021/12/23 13:50:50 [INFO] memberlist: Marking 38a91b0c5100 as failed, suspect timeout reached (0 peer confirmations)
+ha         |     2021/12/23 13:50:50 [INFO] serf: EventMemberLeave: 38a91b0c5100 192.168.42.22
+ha         |     2021/12/23 13:50:51 [INFO] agent: Received event: member-leave
+ha         |     2021/12/23 13:50:51 [ERR] agent: Error invoking script '/serf-handlers/member-leave.sh': exit status 127
+ha         |     2021/12/23 13:50:52 [INFO] memberlist: Suspect 38a91b0c5100 has failed, no acks received
+ha         | [WARNING] 356/135054 (213) : Server nodes/s2 is DOWN, reason: Layer4 timeout, check duration: 2001ms. 0 active and 0 backup servers left. 0 sessions active, 0 requeued, 0 remaining in queue.
+ha         | [ALERT] 356/135054 (213) : backend 'nodes' has no server available!
