@@ -163,10 +163,16 @@ s1
 - 
 
 > Take a screenshots of the HAProxy stat page showing more than 2 web applications running. Additional screenshots are welcome to see a sequence of experimentations like shutting down a node and starting more nodes.
->
+
+
+
 > Also provide the output of `docker ps` in a log file. At least  one file is expected. You can provide one output per step of your experimentation according to your screenshots.
 
+
+
 > Give your own feelings about the final solution. Propose improvements or ways to do the things differently. If any, provide references to your readings for the improvements.
+
+
 
 > (Optional:) Present a live demo where you add and remove a backend container.
 
