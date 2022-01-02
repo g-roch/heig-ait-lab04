@@ -1,0 +1,4 @@
+CONTAINER ID   IMAGE            COMMAND   CREATED          STATUS          PORTS                                                                                                                                         NAMES
+5c1693a48feb   labo_4_haproxy   "/init"   11 minutes ago   Up 11 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp, 7373/tcp, 0.0.0.0:1936->1936/tcp, :::1936->1936/tcp, 0.0.0.0:9999->9999/tcp, :::9999->9999/tcp, 7946/tcp   ha
+c0461cc0b82a   labo_4_webapp3   "/init"   17 minutes ago   Up 3 seconds    7373/tcp, 7946/tcp, 0.0.0.0:4002->3000/tcp, :::4002->3000/tcp                                                                                 s3
+543a4bed586c   labo_4_webapp2   "/init"   9 days ago       Up 11 minutes   7373/tcp, 7946/tcp, 0.0.0.0:4001->3000/tcp, :::4001->3000/tcp                                                                                 s2
