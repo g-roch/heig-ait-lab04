@@ -50,21 +50,15 @@ On pourrait modifier la configuration de HAProxy afin qu'elle détecte automatiq
 
 Dans notre situation actuelle, nous avons un seul service spécifique sur chaque conteneur et il est donc impossible de démarrer plusieurs services par conteneur. 
 
-Si on souhaite pouvoir démarrer plusieurs services au sein du même conteneur, il serait nécessaire qu'on lance notre propre application qui elle lancerait à la fois le service web/HAProxy et le service de logs centralisé.
+`Docker` considaire le processus qu’il lance pour le conteneur comme étant le processus principal, lorsque ce processus se termine, le container est donc terminé pour lui. Si on souhaite pouvoir démarrer plusieurs services au sein du même conteneur, il serait nécessaire d’avoir un processus qui lancerait à la fois le service web/HAProxy et le service de logs centralisé.
 
-TODO
-
--> service spécifique sur chaque conteneur, peut pas démarrer plusieurs services par conteneur car on veut un endroit central pour les logs
-
--> si on veut plusieurs services sur le même conteneur, nous devons lancer notre propre application qui elle lancera à la fois le service web/load balancer et notre service de logs centralisé
-
--> comment le faire ? quels outils ? --> _docker système pour collecter logs des conteneurs qui tournent (compatibilité entre les conteneurs ?)_
+Pour gérer un journal de log, `Docker` permet de récupérer les logs des conteneurs (accéssible via la commande `docker logs`, il n’y a donc pas forcement besoin d’un processus annexe.
 
 > [M6] What happens if we add more web server nodes? Do you think it is really dynamic? It's far away from being a dynamic configuration. Can you propose a solution to solve this?
 
-Afin d'ajouter de nouveaux noeuds serveurs, nous devons toujours modifier la configuration HAProxy et ainsi ce n'est pas une méthode très dynamique. Une solution possible serait de boucler dans la liste des noeuds et de modifier dynamiquement la configuration de HAProxy pour chaque noeud. Ceci peut être archivé avec un template engine.
+Afin d'ajouter de nouveaux noeuds serveurs, nous devons toujours modifier la configuration HAProxy et ainsi ce n'est pas une méthode très dynamique. Une solution possible serait de boucler dans la liste des noeuds et de modifier dynamiquement la configuration de HAProxy pour chaque noeud lors du démarrage de HAProxy. Ceci peut être archivé avec un template engine.
 
-TODO
+On peux également pousser le configuration automatique plus loin, en faisant en sorte que lorsqu’un nouveau nœud démarre et se signal auprès du conteneur `haproxy`, ce dernier se reconfigure automatiquement.
 
 > Take a screenshot of the stats page of HAProxy at <http://192.168.42.42:1936>. You should see your backend nodes.
 
@@ -72,7 +66,7 @@ TODO
 
 > Give the URL of your repository URL in the lab report.
 
-[Repo laboratoire](https://github.com/g-roch/heig-ait-lab04)
+[Dépôt du laboratoire: `https://github.com/g-roch/heig-ait-lab04`](https://github.com/g-roch/heig-ait-lab04)
 
 ### Tâche 1
 
@@ -82,9 +76,9 @@ TODO
 
 > Describe your difficulties for this task and your understanding of what is happening during this task. Explain in your own words why are we installing a process supervisor. Do not hesitate to do more research and to find more articles on that topic to illustrate the problem.
 
-Nous n'avons pas eu de difficultés particulières pour effectuer cette tâche; les consignes étaient claires et bien structurées. 
+Nous n'avons pas eu de difficultés particulières pour effectuer cette tâche; les consignes étaient claires et bien structurées. Nous étions déjà familiarisé avec les outils grâce au laboratoire précédent
 
-Nous avons installé un process supervisor afin de répondre aux besoins de la question **[M5]**.
+Nous avons installé un process supervisor (comme indiqué dans la consigne) afin de répondre aux besoins de la question **[M5]**.
 
 ### Tâche 2
 
@@ -92,9 +86,9 @@ Nous avons installé un process supervisor afin de répondre aux besoins de la q
 
 Voir les logs dans le répertoire `logs/task2`. Les fichiers présents sont:
 
-- `haproxy.log`
-- `webapp1.log`
-- `webapp2.log`
+- [`haproxy.log`](../logs/task2/haproxy.log)
+- [`webapp1.log`](../logs/task2/webapp1.log)
+- [`webapp2.log`](../logs/task2/webapp2.log)
 
 > Give the answer to the question about the existing problem with the current solution.
 
@@ -112,14 +106,14 @@ Comme alternative, on pourrait utiliser l'outil `Consul` qui utilise également 
 
 Voir les logs dans le répertoire `logs/task3`. Les fichiers présents sont:
 
-- `haproxy.log`
-- `webapp1.log`
-- `webapp2.log`
-- `serf.log`
+- [`haproxy.log`](../logs/task3/haproxy.log)
+- [`webapp1.log`](../logs/task3/webapp1.log)
+- [`webapp2.log`](../logs/task3/webapp2.log)
+- [`serf.log`](../logs/task3/serf.log)
 
 > Provide the logs from the `ha` container gathered directly from the `/var/log/serf.log` file present in the container. Put the logs in the `logs` directory in your repo.
 
-Voir le fichier `serf.log` dans le répertoire `logs/task3`.
+Voir le fichier [`serf.log`](../logs/task3/serf.log) dans le répertoire [`logs/task3`](../logs/task3).
 
 ### Tâche 4
 
@@ -138,11 +132,16 @@ Voir le fichier `serf.log` dans le répertoire `logs/task3`.
 > RUN command 1 && command 2 && command 3
 > ```
 
-TODO
+Les deux façons de faire on leur avantage.
 
-Répondre à ces questions:
+- La premier avec une ligne par commande, et très utile lors du dévellopement, car une image est créée entre chaque commande. Si on ne modifie que la dernier commande seule cette dernière est réexecutée, ce qui permet de gagner du temps
+- La seconde permet justement d’éviter de créer ces images temporaire et donc de limiter la taille totale à stocker pour le conteneur. Cette méthode est à privilégier lors qu’il y a des commande qui générer beaucoup de cache et qu’on veux executé un autre commande pour vider ce cache (notamment lorsqu’on n’a pas besoin de ce cache à l’execution)
 
-What about the merge of the commands ? What type of merge do you precognize ?
+> What about the merge of the commands ? What type of merge do you precognize ?
+
+On conseille donc d’utiliser la méthode 1 lors du développement puis la méthode 2 lors de la publication.
+
+TODO:
 
 Like 1 line to pull all neded dependencies then 1 line to decompress them then 1 line to install them ? or 1 line per dependencies
 
