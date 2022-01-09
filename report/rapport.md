@@ -139,11 +139,7 @@ Les deux façons de faire on leur avantage.
 
 > What about the merge of the commands ? What type of merge do you precognize ?
 
-On conseille donc d’utiliser la méthode 1 lors du développement puis la méthode 2 lors de la publication.
-
-TODO:
-
-Like 1 line to pull all neded dependencies then 1 line to decompress them then 1 line to install them ? or 1 line per dependencies
+On conseille donc d’utiliser la méthode 1 lors du développement puis la méthode 2 lors de la publication. Cela permet de réduire les temps de compilation lors de fréquent changement, et de basculer dans un mode de réduction de l’espace disque plus-tard.
 
 > Propose a different approach to architecture our images to be able to reuse as much as possible what we have done. Your proposition should also try to avoid as much as possible repetitions between your images.
 
@@ -151,20 +147,20 @@ Nous pouvons utiliser `FROM` dans le Dockerfile avec une image de base qui conti
 
 > Provide the `/tmp/haproxy.cfg` file generated in the `ha` container after each step.  Place the output into the `logs` folder like you already did for the Docker logs in the previous tasks. Three files are expected.
 
-Voir les fichiers de configuration dans le répertoire `logs/task4`. Les fichiers présents sont:
+Voir les fichiers de configuration dans le répertoire [`logs/task4`](../logs/task4/). Les fichiers présents sont:
 
-- `haproxy_ha.cfg`
-- `haproxy_s1.cfg`
-- `haproxy_s2.cfg`
+- [`haproxy_ha.cfg`](../logs/task4/haproxy_ha.cfg)
+- [`haproxy_s1.cfg`](../logs/task4/haproxy_s1.cfg)
+- [`haproxy_s2.cfg`](../logs/task4/haproxy_s2.cfg)
 
 > In addition, provide a log file containing the output of the `docker ps` console and another file (per container) with `docker inspect <container>`. Four files are expected.
 
-Voir les fichiers de logs dans le répertoire `logs/task4`. Les fichiers présents sont:
+Voir les fichiers de logs dans le répertoire [`logs/task4`](../logs/task4/). Les fichiers présents sont:
 
--  `docker_ps.log`
-- `docker_inspect_ha.log`
-- `docker_inspect_s1.log`
-- `docker_inspect_s2.log`
+-  [`docker_ps.log`](../logs/task4/docker_ps.log)
+- [`docker_inspect_ha.log`](../logs/task4/docker_inspect_ha.log)
+- [`docker_inspect_s1.log`](../logs/task4/docker_inspect_s1.log)
+- [`docker_inspect_s2.log`](../logs/task4/docker_inspect_s2.log)
 
 > Based on the three output files you have collected, what can you say about the way we generate it? What is the problem if any?
 
@@ -180,24 +176,24 @@ Le problème est qu'à chaque fois qu'un noeud se connecte au cluster, le log de
 
 > Provide the file `/usr/local/etc/haproxy/haproxy.cfg` generated in the `ha` container after each step. Three files are expected. 
 
-Voir les fichiers de configuration dans le répertoire `logs/task5`. Les fichiers présents sont:
+Voir les fichiers de configuration dans le répertoire [`logs/task5`](../logs/task5/). Les fichiers présents sont:
 
-- `haproxy_first_started.cfg`
-- `haproxy_second_started.cfg`
-- `haproxy_stopped.cfg`
+- [`haproxy_first_started.cfg`](../logs/task5/haproxy_first_started.cfg)
+- [`haproxy_second_started.cfg`](../logs/task5/haproxy_second_started.cfg)
+- [`haproxy_stopped.cfg`](../logs/task5/haproxy_stopped.cfg)
 
 > In addition, provide a log file containing the output of the `docker ps` console and another file (per container) with `docker inspect <container>`. Four files are expected.
 
-Voir les fichiers de logs dans le répertoire `logs/task5`. Les fichiers présents sont:
+Voir les fichiers de logs dans le répertoire [`logs/task5`](../logs/task5/). Les fichiers présents sont:
 
-- `docker_ps.log`
-- `docker_inspect_ha.log`
-- `docker_inspect_s1.log`
-- `docker_inspect_s2.log`
+- [`docker_ps.log`](../logs/task5/docker_ps.log)
+- [`docker_inspect_ha.log`](../logs/task5/docker_inspect_ha.log)
+- [`docker_inspect_s1.log`](../logs/task5/docker_inspect_s1.log)
+- [`docker_inspect_s2.log`](../logs/task5/docker_inspect_s2.log)
 
 > Provide the list of files from the `/nodes` folder inside the `ha` container. One file expected with the command output.
 
-Voir le fichier `content_nodes1.log` dans le répertoire `logs/task5`.
+Voir le fichier [`content_nodes1.log`](../logs/task5/content_nodes1.log) dans le répertoire `logs/task5`.
 
 Ci-dessous, après le démarrage des deux webapps, on voit les deux conteneurs. 
 
@@ -208,7 +204,7 @@ Ci-dessous, après le démarrage des deux webapps, on voit les deux conteneurs.
 
 > Provide the configuration file after you stopped one container and the list of nodes present in the `/nodes` folder. One file expected with the command output. Two files are expected.
 
-Voir les fichiers  `haproxy_stopped.cfg` et `content_nodes2.log` dans le répertoire `logs/task5`.
+Voir les fichiers  [`haproxy_stopped.cfg`](../logs/task5/haproxy_stopped.cfg) et [`content_nodes2.log`](../logs/task5/content_nodes2.log) dans le répertoire [`logs/task5`](../logs/task5/).
 
 Lors de l'arret de la webapp1:
 
@@ -221,7 +217,7 @@ s1
 
 > In addition, provide a log file containing the output of the  `docker ps` console. One file expected.
 
-Voir le fichier  `docker_ps2.log`  dans le répertoire `log/task5`.
+Voir le fichier  [`docker_ps2.log`](../logs/task5/docker_ps2.log)  dans le répertoire [`log/task5`](../logs/task5/).
 
 > (Optional:) Propose a different approach to manage the list of backend nodes. You do not need to implement it. You can also propose your own tools or the ones you discovered online. In that case, do not forget to cite your references.
 
@@ -229,36 +225,35 @@ Nous n'avons pas effectué cette manipulation.
 
 ### Tâche 6
 
-23.12.21, arrivés jusqu'ici, nous avons fait les task 2-5:
+Voir les fichiers de logs dans le répertoire [`logs/task6`](../logs/task6/). Les fichiers présents sont:
 
-- utilisation de Serf pour le gestion de membres
-- configuration de handlebars/nodejs
-- changement du haproxy de manière dynamique lorsqu'il y des changements de membres
-- 
+- [`docker_ps.log`](../logs/task6/docker_ps.log)
+- [`docker_ps_stopped.log`](../logs/task6/docker_ps_stopped.log)
+- [`docker_ps_started_s3.log`](../logs/task6/docker_ps_started_s3.log)
 
 > Take a screenshots of the HAProxy stat page showing more than 2 web applications running. Additional screenshots are welcome to see a sequence of experimentations like shutting down a node and starting more nodes.
 >
 > Also provide the output of `docker ps` in a log file. At least one file is expected. You can provide one output per step of your experimentation according to your screenshots.
 
-Pour la première partie, nous avons ajouté un nouveau noeud dans le cluster, `s3`. Voir le fichier `docker_ps.log` dans le répertoire `log/task6`. Nous avons également capturer les statistiques et nous pouvons voir la troisième webapp.
+Pour la première partie, nous avons ajouté un nouveau noeud dans le cluster, `s3`. Voir le fichier [`docker_ps.log`](../logs/task6/docker_ps.log) dans le répertoire `logs/task6`. Nous avons également capturer les statistiques et nous pouvons voir la troisième webapp lorsqu’on lance les 4 docker en même temps.
 
 ![](img/task06-01.png)
 
-Pour la seconde partie, nous avons arrêté les noeuds s1 et s3. Voir le fichier `docker_ps_stopped.log`. Nous pouvons voir dans la capture de statistiques suivantes, qu'il ne reste plus qu'un noeud dans le cluster.
+Pour la seconde partie, nous avons arrêté les noeuds s1 et s3. Voir le fichier [`docker_ps_stopped.log`](../logs/task6/docker_ps_stopped.log). Nous pouvons voir dans la capture de statistiques suivantes, qu'il ne reste plus qu'un noeud dans le cluster.
 
 ![](img/task06-02.png)
 
-Finalement, nous avons redémarré s3. Voir le fichier `docker_ps_started_s3.log`. Nous pouvons voir dans la capture de statistiques suivantes, qu'il y a les noeuds s2 et s3 dans le cluster.
+Finalement, nous avons redémarré s3. Voir le fichier [`docker_ps_started_s3.log`](../logs/task6/docker_ps_started_s3.log). Nous pouvons voir dans la capture de statistiques suivantes, qu'il y a les noeuds s2 et s3 dans le cluster.
 
 ![](img/task06-03.png)
 
 > Give your own feelings about the final solution. Propose improvements or ways to do the things differently. If any, provide references to your readings for the improvements.
 
-HAProxy est assez réactif dans notre cas, car nous utilisons un petit nombre de noeuds et il y a peu de noeuds qui s'éteignent ou s'activent dans un temps donné. 
+HAProxy est assez réactif dans notre cas, car nous utilisons un petit nombre de nœuds et il y a peu de nœuds qui s'éteignent ou s'activent dans un temps donné. 
 
 Dans le cas contraire, nous risquerions d'avoir des pertes de connexion lorsqu'un client demande une page web et que HAProxy est en train de redémarrer et se reconfigure.
 
-Un autre point qui pourrait être amélioré est qu'il est nécessaire d'ajouter manuellement les noeuds dans le ficher de configuration docker-compose afin de les ajouter au cluster. Il est possible d'utiliser des `replicas` de docker-compose qui nous permettent de démarrer n conteneurs ayant la même configuration en même temps.
+Un autre point qui pourrait être amélioré est qu'il est nécessaire d'ajouter manuellement les nœuds dans le ficher de configuration `docker-compose.yml` afin de les ajouter au cluster. Il est possible d'utiliser des `replicas` de docker-compose qui nous permettent de démarrer n conteneurs ayant la même configuration en même temps.
 
 > (Optional:) Present a live demo where you add and remove a backend container.
 
@@ -266,7 +261,7 @@ Nous n'avons pas effectué cette manipulation.
 
 ## 3. Difficultés
 
-Nous n'avons pas eu de difficultés particulières durant ce laboratoire. La consigne était très claire et chaque étape était bien expliquée et documentée.
+Nous n'avons pas eu de difficultés particulières durant ce laboratoire. La consigne était claire et chaque étape était bien expliquée et documentée.
 
 ## 4. Conclusion
 
@@ -274,10 +269,18 @@ En conlusion, ce laboratoire nous a permis de prendre en main HAProxy avec son s
 
 ## 5. Références
 
+**Configuration de docker-compose avec des réplicas : **
+
 https://docs.docker.com/compose/compose-file/compose-file-v3/#replicas
+
+**Comparatif Consul vs. Serf :**
 
 https://www.consul.io/docs/intro/vs/serf
 
+**Site web de Serf :**
+
 https://www.serf.io/
+
+**Information à propos du protocole GOSSIP :**
 
 https://www.serf.io/docs/internals/gossip.html
