@@ -50,15 +50,15 @@ On pourrait modifier la configuration de HAProxy afin qu'elle détecte automatiq
 
 Dans notre situation actuelle, nous avons un seul service spécifique sur chaque conteneur et il est donc impossible de démarrer plusieurs services par conteneur. 
 
-`Docker` considaire le processus qu’il lance pour le conteneur comme étant le processus principal, lorsque ce processus se termine, le container est donc terminé pour lui. Si on souhaite pouvoir démarrer plusieurs services au sein du même conteneur, il serait nécessaire d’avoir un processus qui lancerait à la fois le service web/HAProxy et le service de logs centralisé.
+`Docker` considère le processus qu’il lance pour le conteneur comme étant le processus principal. Lorsque ce processus se termine, le container est donc terminé pour lui. Si l'on souhaite pouvoir démarrer plusieurs services au sein du même conteneur, il serait nécessaire d’avoir un processus qui lancerait à la fois le service web/HAProxy et le service de logs centralisé.
 
-Pour gérer un journal de log, `Docker` permet de récupérer les logs des conteneurs (accéssible via la commande `docker logs`, il n’y a donc pas forcement besoin d’un processus annexe.
+Pour gérer un journal de log, `Docker` permet de récupérer les logs des conteneurs (accessible via la commande `docker logs`), il n’y a donc pas forcément besoin d’un processus annexe.
 
 > [M6] What happens if we add more web server nodes? Do you think it is really dynamic? It's far away from being a dynamic configuration. Can you propose a solution to solve this?
 
 Afin d'ajouter de nouveaux noeuds serveurs, nous devons toujours modifier la configuration HAProxy et ainsi ce n'est pas une méthode très dynamique. Une solution possible serait de boucler dans la liste des noeuds et de modifier dynamiquement la configuration de HAProxy pour chaque noeud lors du démarrage de HAProxy. Ceci peut être archivé avec un template engine.
 
-On peux également pousser le configuration automatique plus loin, en faisant en sorte que lorsqu’un nouveau nœud démarre et se signal auprès du conteneur `haproxy`, ce dernier se reconfigure automatiquement.
+On peut également pousser la configuration automatique plus loin, en faisant en sorte que lorsqu’un nouveau nœud démarre et se signale auprès du conteneur `haproxy`, ce dernier se reconfigure automatiquement.
 
 > Take a screenshot of the stats page of HAProxy at <http://192.168.42.42:1936>. You should see your backend nodes.
 
@@ -76,7 +76,7 @@ On peux également pousser le configuration automatique plus loin, en faisant en
 
 > Describe your difficulties for this task and your understanding of what is happening during this task. Explain in your own words why are we installing a process supervisor. Do not hesitate to do more research and to find more articles on that topic to illustrate the problem.
 
-Nous n'avons pas eu de difficultés particulières pour effectuer cette tâche; les consignes étaient claires et bien structurées. Nous étions déjà familiarisé avec les outils grâce au laboratoire précédent
+Nous n'avons pas eu de difficultés particulières pour effectuer cette tâche; les consignes étaient claires et bien structurées. Nous étions déjà familiarisés avec les outils grâce au laboratoire précédent.
 
 Nous avons installé un process supervisor (comme indiqué dans la consigne) afin de répondre aux besoins de la question **[M5]**.
 
@@ -132,14 +132,14 @@ Voir le fichier [`serf.log`](../logs/task3/serf.log) dans le répertoire [`logs/
 > RUN command 1 && command 2 && command 3
 > ```
 
-Les deux façons de faire on leur avantage.
+Les deux façons de faire ont leur avantage.
 
-- La premier avec une ligne par commande, et très utile lors du dévellopement, car une image est créée entre chaque commande. Si on ne modifie que la dernier commande seule cette dernière est réexecutée, ce qui permet de gagner du temps
-- La seconde permet justement d’éviter de créer ces images temporaire et donc de limiter la taille totale à stocker pour le conteneur. Cette méthode est à privilégier lors qu’il y a des commande qui générer beaucoup de cache et qu’on veux executé un autre commande pour vider ce cache (notamment lorsqu’on n’a pas besoin de ce cache à l’execution)
+- La première avec une ligne par commande, et très utile lors du développement, car une image est créée entre chaque commande. Si l’on ne modifie que la dernière commande, seule cette dernière est reexecutée, ce qui permet de gagner du temps.
+- La seconde permet justement d’éviter de créer ces images temporaires et donc de limiter la taille totale à stocker pour le conteneur. Cette méthode est à privilégier lors qu’il y a des commandes qui générer beaucoup de cache et qu’on veut exécuté un autre commande pour vider ce cache (notamment lorsqu’on n’a pas besoin de ce cache à l’exécution)
 
 > What about the merge of the commands ? What type of merge do you precognize ?
 
-On conseille donc d’utiliser la méthode 1 lors du développement puis la méthode 2 lors de la publication. Cela permet de réduire les temps de compilation lors de fréquent changement, et de basculer dans un mode de réduction de l’espace disque plus-tard.
+On conseille donc d’utiliser la méthode 1 lors du développement puis la méthode 2 lors de la publication. Cela permet de réduire les temps de compilation lors de fréquent changement et de basculer dans un mode de réduction de l’espace disque plus tard.
 
 > Propose a different approach to architecture our images to be able to reuse as much as possible what we have done. Your proposition should also try to avoid as much as possible repetitions between your images.
 
@@ -235,7 +235,7 @@ Voir les fichiers de logs dans le répertoire [`logs/task6`](../logs/task6/). Le
 >
 > Also provide the output of `docker ps` in a log file. At least one file is expected. You can provide one output per step of your experimentation according to your screenshots.
 
-Pour la première partie, nous avons ajouté un nouveau noeud dans le cluster, `s3`. Voir le fichier [`docker_ps.log`](../logs/task6/docker_ps.log) dans le répertoire `logs/task6`. Nous avons également capturer les statistiques et nous pouvons voir la troisième webapp lorsqu’on lance les 4 docker en même temps.
+Pour la première partie, nous avons ajouté un nouveau noeud dans le cluster, `s3`. Voir le fichier [`docker_ps.log`](../logs/task6/docker_ps.log) dans le répertoire `logs/task6`. Nous avons également capturé les statistiques et nous pouvons voir la troisième webapp lorsqu’on lance les 4 docker en même temps.
 
 ![](img/task06-01.png)
 
